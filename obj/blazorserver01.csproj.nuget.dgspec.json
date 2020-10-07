@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mesha\\desktop\\blazorserver01\\blazorserver01.csproj": {}
+    "C:\\Users\\mesha\\Desktop\\blazorserver01\\blazorserver01.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mesha\\desktop\\blazorserver01\\blazorserver01.csproj": {
+    "C:\\Users\\mesha\\Desktop\\blazorserver01\\blazorserver01.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mesha\\desktop\\blazorserver01\\blazorserver01.csproj",
+        "projectUniqueName": "C:\\Users\\mesha\\Desktop\\blazorserver01\\blazorserver01.csproj",
         "projectName": "blazorserver01",
-        "projectPath": "C:\\Users\\mesha\\desktop\\blazorserver01\\blazorserver01.csproj",
+        "projectPath": "C:\\Users\\mesha\\Desktop\\blazorserver01\\blazorserver01.csproj",
         "packagesPath": "C:\\Users\\mesha\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mesha\\desktop\\blazorserver01\\obj\\",
+        "outputPath": "C:\\Users\\mesha\\Desktop\\blazorserver01\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
