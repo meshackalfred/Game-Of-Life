@@ -5,8 +5,14 @@
 <p>Current count: @currentCount</p>
 <hr>
 @{
-        e.live(2,3);
-         e.live(4,5);       
+    if(currentCount==0){
+        e.live(3,3);
+         e.live(3,4);
+         e.live(3,5);
+         e.live(2,5);
+         e.live(1,4);
+    }
+   
 }
 <table class="environment">
 @for(var i=0; i<@e.total_of_rows(); i++){
@@ -32,6 +38,6 @@
     private void IncrementCount()
     {
         currentCount++;
-        e.live(currentCount,currentCount);
+        e.nextConwayStep();
     }
 }
