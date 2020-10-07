@@ -1,39 +1,37 @@
 ﻿@page "/counter"
 
-<h1>Counter</h1>
+<h1>Game of Live</h1>
 
 <p>Current count: @currentCount</p>
-<p class="btn-primary">Current Message: @currentMsg</p>
-
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
-
 <hr>
-
+@{
+        e.live(2,3);
+         e.live(4,5);       
+}
 <table class="environment">
+@for(var i=0; i<@e.total_of_rows(); i++){
     <tr>
-        <td class = "cell alive"></td>
-        <td class = "cell dead"></td>
-        <td class = "cell alive"></td>
+    @for(var j=0; j<@e.total_of_cols(); j++){
+        @if(e.is_alive(i,j)){
+        <td class="cell alive"></td>
+        }
+        else{
+        <td class="cell dead"></td>
+        }
+    }
     </tr>
-    <tr>
-        <td class = "cell dead"></td>
-        <td class = "cell alive"></td>
-        <td class = "cell dead"></td>
-    </tr>
-    <tr>
-        <td class = "cell alive"></td>
-        <td class = "cell dead"></td>
-        <td class = "cell alive"></td>
-    </tr>
+}
 </table>
 <hr>
+<button class = "btn btn-primary" @onclick="IncrementCount">Next</button>
+
 @code {
     private int currentCount = 0;
-    private string currentMsg;
+    private Data.Environment e = new Data.Environment(15,15);
 
     private void IncrementCount()
     {
         currentCount++;
-        currentMsg = "Hello Meshack " + currentCount.ToString();
+        e.live(currentCount,currentCount);
     }
 }
