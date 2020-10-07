@@ -7,6 +7,26 @@
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
+<hr>
+
+<table class="environment">
+    <tr>
+        <td class = "cell alive"></td>
+        <td class = "cell dead"></td>
+        <td class = "cell alive"></td>
+    </tr>
+    <tr>
+        <td class = "cell dead"></td>
+        <td class = "cell alive"></td>
+        <td class = "cell dead"></td>
+    </tr>
+    <tr>
+        <td class = "cell alive"></td>
+        <td class = "cell dead"></td>
+        <td class = "cell alive"></td>
+    </tr>
+</table>
+<hr>
 @code {
     private int currentCount = 0;
     private string currentMsg;
