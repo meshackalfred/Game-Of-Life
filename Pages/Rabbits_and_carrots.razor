@@ -1,0 +1,66 @@
+@page "/rabbits_and_carrots"
+@using System
+<h1>Rabbits and Carrots</h1>
+<p>Current count: @currentCount</p>
+<hr>
+@{
+    if(currentCount==0){
+        u = new Data.Rabbit(3,3,e);
+        e.insert(3,3,u);
+        u = new Data.Rabbit(3,4,e);
+        e.insert(3,4,u);
+        u = new Data.Rabbit(3,5,e);
+        e.insert(3,5,u);
+        u = new Data.Rabbit(2,5,e);
+        e.insert(2,5,u);
+        u = new Data.Rabbit(1,4,e);
+        e.insert(1,4,u);
+
+        u = new Data.Carrot(11,14,e);
+        e.insert(11,14,u);
+        u = new Data.Carrot(12,14,e);
+        e.insert(12,15,u);
+        u = new Data.Carrot(13,14,e);
+        e.insert(13,14,u);
+        u = new Data.Carrot(0,0,e);
+        e.insert(0,0,u);
+
+        int count1 = e.neighbors(1,1).Count();
+        int count2 = e.neighbors(3,6).Count();
+        int count3 = e.neighbors(3,4).Count();
+        Console.WriteLine("Neighbors");
+         Console.WriteLine(count1);
+          Console.WriteLine(count2);
+           Console.WriteLine(count3);
+    }
+}
+<table class="environment">
+    @for(var i=0; i<@e.total_of_rows(); i++)
+    {
+         <tr>
+             @for(var j=0; j<@e.total_of_cols(); j++){
+            @if(e.biounit(i,j)!=null)
+             { 
+            <td class="cell" style = "background-color:@e.biounit(i,j).myColor()"></td> 
+            }
+            else 
+             { 
+           <td class="cell dead"></td> 
+           }
+                }
+            </tr>
+    }
+</table>
+<hr>
+<button class = "btn btn-primary" @onclick="IncrementCount">Next</button>
+@code {
+    private int currentCount = 0;
+    private Data.Environment e = new Data.Environment(40,40);
+    
+    private Data.BioUnit u;
+    private void IncrementCount()
+    {
+        currentCount++; 
+        e.next_Rabbit_Carrot_Step();
+    }
+ }

@@ -48,3 +48,5 @@ C:\Users\mesha\desktop\blazorserver01\obj\Debug\netcoreapp3.1\blazorserver01.dll
 C:\Users\mesha\desktop\blazorserver01\obj\Debug\netcoreapp3.1\blazorserver01.pdb
 C:\Users\mesha\desktop\blazorserver01\obj\Debug\netcoreapp3.1\blazorserver01.genruntimeconfig.cache
 C:\Users\mesha\desktop\blazorserver01\obj\Debug\netcoreapp3.1\blazorserver01.csproj.CopyComplete
+C:\Users\mesha\Desktop\blazorserver01\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Rabbits_and_carrots.razor.g.cs
+C:\Users\mesha\Desktop\blazorserver01\obj\Debug\netcoreapp3.1\Razor\Pages\Rabbits_and_carrots.razor.g.cs
