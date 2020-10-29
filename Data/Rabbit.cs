@@ -4,16 +4,14 @@ namespace blazorserver01.Data
     {
         //base for calling the parents constructor
      private int hungry;
-     private int hungryTop;
-
-      public int living;
-        public int livingTop;
+     private int hungryTop = 0;
 
         public Rabbit(int x, int y, Environment e): base(x,y, e)
         { 
             this.color = "#fafafa";
             this.living = 0;
             this.livingTop = 6;
+            this.hungryTop  = 3;
         }
         public override bool will_I_live(){
             this.hungry++;

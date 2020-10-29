@@ -1,3 +1,101 @@
 ﻿@page "/counter"
 
 <h1>Game of Live</h1>
+
+@* <p>Current count: @currentCount and current radio @theRadio</p> *@
+
+<hr>
+@{
+    //only the first time (initial pattern )
+    if(currentCount==0){
+        e.put_pattern(6,6,"pentadecathlon");
+        e.put_pattern(15,15,"pentadecathlon");
+    }
+}
+
+<table class="environment">
+    @for(var i=0; i<@e.total_of_rows(); i++)
+    {
+         <tr>
+             @for(var j=0; j<@e.total_of_cols(); j++){
+            @if(e.biounit(i,j)!=null)
+             { 
+            <td class="cell" style = "background-color:@e.biounit(i,j).myColor()"></td> 
+            } 
+            else 
+             { 
+           <td class="cell dead"></td> 
+           } 
+         }
+            </tr>
+    }
+</table>
+
+<p>
+    <input type="radio" name="myradiobtn" checked="@(theRadio.Equals("step"))" value="step" @onchange="ClickRadio"/>
+    Step by step
+    <input type="radio" name="myradiobtn" checked="@(theRadio.Equals("many"))" value="many" @onchange="ClickRadio"/>
+    Several steps
+</p>
+
+<div style="display:@(theRadio.Equals("many")?"":"none")">
+<h5>Cycle Specification</h5>
+Number of cycles;
+
+<select @bind = "option">
+<option value= "1">1st</option>
+<option value = "2">2nd</option>
+<option value = "3">3rd</option>
+<option value = "4">4th</option>
+<option value = "5">5th</option>
+</select>
+<br>
+Add option @option;
+</div>
+
+<hr>
+<button class = "btn btn-primary" @onclick="IncrementCount">Next</button>
+
+@* <button class = "btn btn-primary" @onclick="UpdateHeading">Add Pattern ...</button> *@
+@* <input class ="btn btn-primary" type="button" name="mybtn"  value="Add Pattern..." @onchange="ClickButton"/> *@
+
+<button style = "display:@(Message.Equals("Add the pattern pentadecathlon")?"none":"")" class = "btn btn-primary" @onclick=@(() => Message = "Add the pattern pentadecathlon")>Add Pattern...</button> 
+<button style="display:@(Message.Equals("Add the pattern pentadecathlon")?"":"none") ;" class = "btn btn-primary" @onclick=@(() => Message = "Add the pattern")>Add Pattern -</button> 
+
+
+<input type="submit" value="@Message" style = "display:@(Message.Equals("Add the pattern pentadecathlon")?"":"none")">
+<hr>
+<a  
+    class="btn btn-primary"
+    href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"
+    target="_blank">
+    Look for Patterns in Wikipedia
+</a>
+
+@code{
+
+private string Message { get; set; } = "";
+
+    @* private int cyclePerTime = 0; *@
+    private String theRadio="";
+    private String theButton ="Add me ";
+    private int currentCount = 0;
+      private Data.Environment e = new Data.Environment(30,30);
+       
+       private string option = "";
+
+private void UpdateHeading(MouseEventArgs e){
+
+}
+ private void IncrementCount()
+    {
+        currentCount++; 
+        @* e.next_Rabbit_Carrot_Step(); *@
+        e.nextConwayStep();
+    }
+
+    private void ClickRadio(ChangeEventArgs args){
+        theRadio = args.Value.ToString();
+        currentCount++;
+    }
+}
