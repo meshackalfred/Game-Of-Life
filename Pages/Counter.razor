@@ -2,8 +2,6 @@
 
 <h1>Game of Live</h1>
 
-@* <p>Current count: @currentCount and current radio @theRadio</p> *@
-
 <hr>
 @{
     //only the first time (initial pattern )
@@ -56,15 +54,20 @@ Add option @option;
 <hr>
 <button class = "btn btn-primary" @onclick="IncrementCount">Next</button>
 
-@* <button class = "btn btn-primary" @onclick="UpdateHeading">Add Pattern ...</button> *@
-@* <input class ="btn btn-primary" type="button" name="mybtn"  value="Add Pattern..." @onchange="ClickButton"/> *@
+@* Adding first button *@
+<button style = "display:@(Message.Equals("Add the pattern pentadecathlon")?"none":"")" 
+class = "btn btn-primary" @onclick=@(() => Message = "Add the pattern pentadecathlon")>Add Pattern...</button> 
 
-<button style = "display:@(Message.Equals("Add the pattern pentadecathlon")?"none":"")" class = "btn btn-primary" @onclick=@(() => Message = "Add the pattern pentadecathlon")>Add Pattern...</button> 
-<button style="display:@(Message.Equals("Add the pattern pentadecathlon")?"":"none") ;" class = "btn btn-primary" @onclick=@(() => Message = "Add the pattern")>Add Pattern -</button> 
+@* Adding second button *@
+<button style="display:@(Message.Equals("Add the pattern pentadecathlon")?"":"none") ;" 
+class = "btn btn-primary" @onclick=@(() => Message = "Add the pattern")>Add Pattern -</button> 
 
+@* Displaying text after click *@
+<input type="submit" value="@Message" 
+style = "display:@(Message.Equals("Add the pattern pentadecathlon")?"":"none")">
 
-<input type="submit" value="@Message" style = "display:@(Message.Equals("Add the pattern pentadecathlon")?"":"none")">
 <hr>
+
 <a  
     class="btn btn-primary"
     href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"
@@ -73,24 +76,18 @@ Add option @option;
 </a>
 
 @code{
+    //Defining a valuable for Pattern button
+    private string Message { get; set; } = "";
 
-private string Message { get; set; } = "";
-
-    @* private int cyclePerTime = 0; *@
     private String theRadio="";
-    private String theButton ="Add me ";
     private int currentCount = 0;
       private Data.Environment e = new Data.Environment(30,30);
        
        private string option = "";
 
-private void UpdateHeading(MouseEventArgs e){
-
-}
  private void IncrementCount()
     {
         currentCount++; 
-        @* e.next_Rabbit_Carrot_Step(); *@
         e.nextConwayStep();
     }
 
