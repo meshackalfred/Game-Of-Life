@@ -6,8 +6,8 @@
 @{
     //only the first time (initial pattern )
     if(currentCount==0){
-        e.put_pattern(6,6,"pentadecathlon");
-        e.put_pattern(15,15,"pentadecathlon");
+        e.put_pattern(@col,@row,"pentadecathlon");
+       // e.put_pattern(15,15,"pentadecathlon");
     }
 }
 
@@ -48,24 +48,37 @@ Number of cycles;
 <option value = "5">5th</option>
 </select>
 <br>
-Add option @option;
+Add option @option
 </div>
 
 <hr>
 <button class = "btn btn-primary" @onclick="IncrementCount">Next</button>
 
+<hr>
+<div style="display: flex;">
 @* Adding first button *@
-<button style = "display:@(Message.Equals("Add the pattern pentadecathlon")?"none":"")" 
-class = "btn btn-primary" @onclick=@(() => Message = "Add the pattern pentadecathlon")>Add Pattern...</button> 
+<button style = "display:@(Message.Equals("Pattern pentadecathlon")?"none":"")" 
+class = "btn btn-primary" @onclick=@(() => Message = "Pattern pentadecathlon")>Add Pattern...</button> 
 
 @* Adding second button *@
-<button style="display:@(Message.Equals("Add the pattern pentadecathlon")?"":"none") ;" 
-class = "btn btn-primary" @onclick=@(() => Message = "Add the pattern")>Add Pattern -</button> 
+<button style="display:@(Message.Equals("Pattern pentadecathlon")?"":"none") ;" 
+class = "btn btn-primary" @onclick=@(() => Message = "Add the Pattern")>Add (-)</button> 
 
+<form action="" style = "display:@(Message.Equals("Pattern pentadecathlon")?"":"none")">
 @* Displaying text after click *@
-<input type="submit" value="@Message" 
-style = "display:@(Message.Equals("Add the pattern pentadecathlon")?"":"none")">
+@Message
+@* <input type="submit" value="@Message"> *@
 
+<label for="">row</label>
+<input type="text"/>
+
+<label for="">col</label>
+<input type="text"/>
+
+<button type="submit" class = "btn btn-primary">Add</button>
+</form>
+
+</div>
 <hr>
 
 <a  
@@ -77,13 +90,24 @@ style = "display:@(Message.Equals("Add the pattern pentadecathlon")?"":"none")">
 
 @code{
     //Defining a valuable for Pattern button
+
     private string Message { get; set; } = "";
+    
+    private int col { get; set; } =0 ;
+    
+    private  int row { get; set; } =0;
+    private bool AddButton;
 
     private String theRadio="";
     private int currentCount = 0;
       private Data.Environment e = new Data.Environment(30,30);
        
        private string option = "";
+
+     protected override void OnInitialized()
+    {
+        Message = col.ToString() ?? "true";
+    }
 
  private void IncrementCount()
     {
