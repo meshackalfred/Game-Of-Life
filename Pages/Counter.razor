@@ -3,14 +3,8 @@
 <h1>Game of Live</h1>
 
 <hr>
-@{
-    //only the first time (initial pattern )
-    if(currentCount==0){
-        e.put_pattern(@col,@row,"pentadecathlon");
-       // e.put_pattern(15,15,"pentadecathlon");
-    }
-}
 
+@* table *@
 <table class="environment">
     @for(var i=0; i<@e.total_of_rows(); i++)
     {
@@ -29,6 +23,7 @@
     }
 </table>
 
+@* radio button *@
 <p>
     <input type="radio" name="myradiobtn" checked="@(theRadio.Equals("step"))" value="step" @onchange="ClickRadio"/>
     Step by step
@@ -36,6 +31,7 @@
     Several steps
 </p>
 
+@* hidden option from the radio click *@
 <div style="display:@(theRadio.Equals("many")?"":"none")">
 <h5>Cycle Specification</h5>
 Number of cycles;
@@ -51,34 +47,25 @@ Number of cycles;
 Add option @option
 </div>
 
-<hr>
+@* increment button *@
 <button class = "btn btn-primary" @onclick="IncrementCount">Next</button>
 
-<hr>
-<div style="display: flex;">
-@* Adding first button *@
-<button style = "display:@(Message.Equals("Pattern pentadecathlon")?"none":"")" 
-class = "btn btn-primary" @onclick=@(() => Message = "Pattern pentadecathlon")>Add Pattern...</button> 
 
-@* Adding second button *@
-<button style="display:@(Message.Equals("Pattern pentadecathlon")?"":"none") ;" 
-class = "btn btn-primary" @onclick=@(() => Message = "Add the Pattern")>Add (-)</button> 
+@* maximizing first button *@
+<button class = "btn btn-primary" @onclick="AddPatternButton">@PatternMessage</button> 
 
-<form action="" style = "display:@(Message.Equals("Pattern pentadecathlon")?"":"none")">
+<div class="my-3" style = "display:@(DisplayButton == true ? "none" : "block")" >
 @* Displaying text after click *@
-@Message
+
 @* <input type="submit" value="@Message"> *@
 
-<label for="">row</label>
-<input type="text"/>
+<label> row <input class="form-control" type="number" @bind="row"> </label>
+<label> col <input class="form-control" type="number" @bind="col"> </label>
 
-<label for="">col</label>
-<input type="text"/>
 
-<button type="submit" class = "btn btn-primary">Add</button>
-</form>
-
+<button class = "btn btn-primary" @onclick = "AddPattern"> Add @PatternName Pattern</button>
 </div>
+
 <hr>
 
 <a  
@@ -92,24 +79,23 @@ class = "btn btn-primary" @onclick=@(() => Message = "Add the Pattern")>Add (-)<
     //Defining a valuable for Pattern button
 
     private string Message { get; set; } = "";
+    private bool DisplayButton = true;
     
-    private int col { get; set; } =0 ;
+    private string PatternName = "pentadecathlon";
+    private string PatternMessage ="Add Pattern...";
+    private int col { get; set; }=0;
     
     private  int row { get; set; } =0;
-    private bool AddButton;
-
+   
     private String theRadio="";
+
     private int currentCount = 0;
-      private Data.Environment e = new Data.Environment(30,30);
+
+    private Data.Environment e = new Data.Environment(30,30);
        
-       private string option = "";
+    private string option = "";
 
-     protected override void OnInitialized()
-    {
-        Message = col.ToString() ?? "true";
-    }
-
- private void IncrementCount()
+    private void IncrementCount()
     {
         currentCount++; 
         e.nextConwayStep();
@@ -119,4 +105,14 @@ class = "btn btn-primary" @onclick=@(() => Message = "Add the Pattern")>Add (-)<
         theRadio = args.Value.ToString();
         currentCount++;
     }
+
+    private void AddPattern(){
+        e.put_pattern(row, col, PatternName);
+        row = col = 0;
+    }
+    private void AddPatternButton(){
+        PatternMessage = "Add Pattern " + (DisplayButton ? "(-)" : "...");
+        DisplayButton = !DisplayButton;
+    } 
+
 }

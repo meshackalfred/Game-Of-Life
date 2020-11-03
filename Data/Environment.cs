@@ -116,40 +116,38 @@ public void next_Rabbit_Carrot_Step(){
     }
 }
 
-public void nextConwayStep(){
-    int n;
-    bool[,] aux = new bool[this.rows, this.cols];
-    for(var i=0; i<this.rows; i++)
-    for(var j=0; j<this.cols; j++){
-        n = this.surrondingNeighborns(i,j,"BioUnit");
-        if (n==3)
-        aux [i,j] = true;
-        else if (n==2  && this.cell[i,j]!=null)
-        aux[i,j] = true;
-        else
-        aux[i,j] = false;
-    }
-    for(var i=0; i<this.rows; i++)
-    for(var j=0; j<this.cols; j++){
-        if (aux[i,j] && this.cell[i,j] == null){
-            this.cell[i,j] = new BioUnit(i,j,this);
+        public void nextConwayStep(){
+            int n;
+            bool[,] aux = new bool[this.rows, this.cols];
+                for(var i=0; i<this.rows; i++)
+                for(var j=0; j<this.cols; j++){
+                    n = this.surrondingNeighborns(i,j,"BioUnit");
+                    if (n==3)
+                        aux [i,j] = true;
+                    else if (n==2  && this.cell[i,j]!=null)
+                        aux[i,j] = true;
+                    else
+                        aux[i,j] = false;
+                    }
+                for(var i=0; i<this.rows; i++)
+                for(var j=0; j<this.cols; j++){
+                    if (aux[i,j] && this.cell[i,j] == null){
+                        this.cell[i,j] = new BioUnit(i,j,this);
+                    }
+                    else if (!aux[i,j] && this.cell[i,j]!=null){
+                        this.cell[i,j] = null;
+                    }
+                }
         }
-        else if (!aux[i,j] && this.cell[i,j]!=null){
-            this.cell[i,j] = null;
-        }
-    }
-
-}
-public void put_pattern(int x, int y, string pattern){
-if(pattern.Equals("pentadecathlon")){
-    for(var i=0; i<8; i++) //rows
-    for(var j=0; j<3; j++) //cols
-    if(!((i==1 && j ==1) || (i==6 && j==1))){
-        this.insert(x+i,y+j, new BioUnit(x+i, y+j, this));
+        public void put_pattern(int x, int y, string pattern){
+            if(pattern.Equals("pentadecathlon")){
+                for(var i=0; i<8; i++) //rows
+                for(var j=0; j<3; j++) //cols
+                    if(!((i==1 && j ==1) || (i==6 && j==1))){
+                        this.insert(x+i,y+j, new BioUnit(x+i, y+j, this));
+                    }
+                }
+            }
     }
 }
-}
-
-    }
-    }
        
