@@ -140,14 +140,42 @@ public void next_Rabbit_Carrot_Step(){
                 }
         }
         public void put_pattern(int x, int y, string pattern){
-            if(pattern.Equals("pentadecathlon")){
-                for(var i=0; i<8; i++) //rows
-                for(var j=0; j<3; j++) //cols
-                    if(!((i==1 && j ==1) || (i==6 && j==1))){
+            if(pattern.Equals("pentadecathlon"))
+            {
+                for(var i=0; i<8; i++)
+                { //rows
+                    for(var j=0; j<3; j++) //cols
+                    if(!((i==1 && j ==1) || (i==6 && j==1)))
+                    {
                         this.insert(x+i,y+j, new BioUnit(x+i, y+j, this));
                     }
                 }
             }
+             if(pattern.Equals("toad"))
+            {
+                for(var i=0; i<4; i++)
+                { //rows
+                    for(var j=0; j<2; j++) //cols
+                    if(!((i==0 && j ==1) || (i==3 && j==0)))
+                    {
+                        this.insert(x+i,y+j, new BioUnit(x+i, y+j, this));
+                    }
+                }
+            }
+             if(pattern.Equals("ship"))
+            {
+                for(var i=0; i<3; i++)
+                { //rows
+                    for(var j=0; j<3; j++) //cols
+                    if(!((i==0 && j ==2) || (i==1 && j==1) || (i==2 && j==0)))
+                    {
+                        this.insert(x+i,y+j, new BioUnit(x+i, y+j, this));
+                    }
+                }
+            }
+
+            
+        }
     }
 }
        

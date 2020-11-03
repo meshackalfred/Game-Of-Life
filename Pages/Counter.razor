@@ -47,42 +47,41 @@ Number of cycles;
 Add option @option
 </div>
 
-@* increment button *@
-<button class = "btn btn-primary" @onclick="IncrementCount">Next</button>
+@* next button *@
+        <button class = "btn btn-primary" @onclick="IncrementCount">Next</button>
 
+<a  
+    class="btn btn-primary"
+     href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life" target="_blank">
+    Look for Patterns in Wikipedia
+</a>
 
-@* maximizing first button *@
-<button class = "btn btn-primary" @onclick="AddPatternButton">@PatternMessage</button> 
+        <button class = "btn btn-primary" @onclick="AddPatternRow">@addPatternText</button> 
 
-<div class="my-3" style = "display:@(DisplayButton == true ? "none" : "block")" >
-@* Displaying text after click *@
-
-@* <input type="submit" value="@Message"> *@
-
-<label> row <input class="form-control" type="number" @bind="row"> </label>
-<label> col <input class="form-control" type="number" @bind="col"> </label>
-
-
-<button class = "btn btn-primary" @onclick = "AddPattern"> Add @PatternName Pattern</button>
+<div class="my-3" style = "display:@(addPatternHidden == true ? "none" : "block")" >
+            <label> row <input class="form-control" type="number" @bind="row"> </label>
+            <label> col <input class="form-control" type="number" @bind="col"> </label>
+            <label>Pattern 
+                <select class="form-control" @bind = "patternType">
+                    <option value="pentadecathlon">Pentadecathlon</option>
+                    <option value="toad">Toad</option>
+                    <option value="ship">Ship</option>
+                </select>
+            </label>
+        <button class = "btn btn-primary" @onclick = "AddPattern"> Add @patternType Pattern</button>
 </div>
 
 <hr>
 
-<a  
-    class="btn btn-primary"
-    href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"
-    target="_blank">
-    Look for Patterns in Wikipedia
-</a>
 
 @code{
     //Defining a valuable for Pattern button
-
-    private string Message { get; set; } = "";
-    private bool DisplayButton = true;
+    private bool addPatternHidden = true;
     
-    private string PatternName = "pentadecathlon";
-    private string PatternMessage ="Add Pattern...";
+    private string patternType = "";
+
+    // private string toadType = "toad"; 
+    private string addPatternText ="Add Pattern...";
     private int col { get; set; }=0;
     
     private  int row { get; set; } =0;
@@ -107,12 +106,22 @@ Add option @option
     }
 
     private void AddPattern(){
-        e.put_pattern(row, col, PatternName);
+
+        @* if(patternType == "pentadecathlon"){
+        e.put_pattern(row, col, "pentadecathlon");
         row = col = 0;
+        }
+        else if(patternType =="toad"){
+        e.put_pattern(row, col, "toad");
+        row = col = 0;
+        } *@
+        e.put_pattern(row, col, patternType);
+        row = col = 0;
+        
     }
-    private void AddPatternButton(){
-        PatternMessage = "Add Pattern " + (DisplayButton ? "(-)" : "...");
-        DisplayButton = !DisplayButton;
+    private void AddPatternRow(){
+        addPatternText = "Add Pattern " + (addPatternHidden ? "(-)" : "...");
+        addPatternHidden = !addPatternHidden;
     } 
 
 }
