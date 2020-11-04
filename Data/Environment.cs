@@ -141,6 +141,7 @@ public void next_Rabbit_Carrot_Step(){
         }
         public void put_pattern(int x, int y, string pattern){
             if(pattern.Equals("pentadecathlon"))
+            
             {
                 for(var i=0; i<8; i++)
                 { //rows
@@ -167,7 +168,7 @@ public void next_Rabbit_Carrot_Step(){
                 for(var i=0; i<3; i++)
                 { //rows
                     for(var j=0; j<3; j++) //cols
-                    if(!((i==0 && j ==2) || (i==1 && j==1) || (i==2 && j==0)))
+                     if(!((i==0 && j ==2) || (i==1 && j==1) || (i==2 && j==0)))
                     {
                         this.insert(x+i,y+j, new BioUnit(x+i, y+j, this));
                     }

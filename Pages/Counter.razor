@@ -55,10 +55,10 @@ Add option @option
      href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life" target="_blank">
     Look for Patterns in Wikipedia
 </a>
-
+<div class = "mt-3">
         <button class = "btn btn-primary" @onclick="AddPatternRow">@addPatternText</button> 
 
-<div class="my-3" style = "display:@(addPatternHidden == true ? "none" : "block")" >
+    <div class="my-3" style = "display:@(addPatternHidden == true ? "none" : "block")" >
             <label> row <input class="form-control" type="number" @bind="row"> </label>
             <label> col <input class="form-control" type="number" @bind="col"> </label>
             <label>Pattern 
@@ -69,8 +69,17 @@ Add option @option
                 </select>
             </label>
         <button class = "btn btn-primary" @onclick = "AddPattern"> Add @patternType Pattern</button>
+    </div>
+     <button class="btn btn-primary" @onclick="AddCells">@addCellsText</button>
+ 
+    <div class="my-3" style="display:@(addCellsHidden == true ? "none" : "block")">
+ 
+        <label>Enter Cells(x,y) <textarea class="form-control" @bind="textAreaCells"></textarea>
+            <button class="btn btn-primary mt-2" @onclick="AddCell">Add cell</button>
+        </label>
+ 
+    </div>
 </div>
-
 <hr>
 
 
@@ -90,9 +99,14 @@ Add option @option
 
     private int currentCount = 0;
 
-    private Data.Environment e = new Data.Environment(30,30);
-       
+    private Data.Environment e = new Data.Environment(30,30);       
     private string option = "";
+    private bool addCellsHidden = true;
+
+    private string addCellsText = "Add cells ...";
+
+    private string textAreaCells = "";
+
 
     private void IncrementCount()
     {
@@ -104,24 +118,28 @@ Add option @option
         theRadio = args.Value.ToString();
         currentCount++;
     }
-
     private void AddPattern(){
-
-        @* if(patternType == "pentadecathlon"){
-        e.put_pattern(row, col, "pentadecathlon");
-        row = col = 0;
-        }
-        else if(patternType =="toad"){
-        e.put_pattern(row, col, "toad");
-        row = col = 0;
-        } *@
         e.put_pattern(row, col, patternType);
         row = col = 0;
-        
     }
     private void AddPatternRow(){
         addPatternText = "Add Pattern " + (addPatternHidden ? "(-)" : "...");
         addPatternHidden = !addPatternHidden;
     } 
-
+     private void AddCells()
+    {
+        addCellsText = "Add cells " + (addCellsHidden ? "(-)" : "...");
+ 
+        addCellsHidden = !addCellsHidden;
+    }
+     private void AddCell()
+    {
+        string[] cells = textAreaCells.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+        foreach (string cell in cells)
+        {
+            var devidedCells = cell.Split(',');
+            e.insert(int.Parse(devidedCells[0]), int.Parse(devidedCells[1]), new blazorserver01.Data.BioUnit(int.Parse(devidedCells[0]),int.Parse(devidedCells[1]),e));
+        }
+        textAreaCells = "";
+    }
 }
