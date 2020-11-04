@@ -174,8 +174,15 @@ public void next_Rabbit_Carrot_Step(){
                     }
                 }
             }
-
-            
+        }
+       
+         public void onOff(int row, int col){
+            if(this.rightPos(row,col)){
+            if(this.cell[row,col]!=null)
+                this.cell[row,col]=null;
+            else
+                this.cell[row,col]=new BioUnit(row,col,this);
+            }
         }
     }
 }
